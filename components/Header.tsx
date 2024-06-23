@@ -1,55 +1,36 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React from 'react';
+import Link from 'next/link';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 
 const Header: React.FC = () => {
-  const router = useRouter();
-  const isActive: (pathname: string) => boolean = (pathname) =>
-    router.pathname === pathname;
-
-  let left = (
-    <div className="left">
-      <Link href="/">
-        <a className="bold" data-active={isActive("/")}>
-          Feed
-        </a>
-      </Link>
-      <style jsx>{`
-        .bold {
-          font-weight: bold;
-        }
-
-        a {
-          text-decoration: none;
-          color: #000;
-          display: inline-block;
-        }
-
-        .left a[data-active="true"] {
-          color: gray;
-        }
-
-        a + a {
-          margin-left: 1rem;
-        }
-      `}</style>
-    </div>
-  );
-
-  let right = null;
-
   return (
-    <nav>
-      {left}
-      {right}
-      <style jsx>{`
-        nav {
-          display: flex;
-          padding: 2rem;
-          align-items: center;
-        }
-      `}</style>
-    </nav>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" style={{ flexGrow: 1 }}>
+          勤怠管理システム
+        </Typography>
+        <Link href="/" passHref>
+          <Button color="inherit">
+            ホーム
+          </Button>
+        </Link>
+        <Link href="/login" passHref>
+          <Button color="inherit">
+            ログイン
+          </Button>
+        </Link>
+        <Link href="/attendance" passHref>
+          <Button color="inherit">
+            勤怠管理
+          </Button>
+        </Link>
+        <Link href="/master" passHref>
+          <Button color="inherit">
+            管理者用ページ
+          </Button>
+        </Link>
+      </Toolbar>
+    </AppBar>
   );
 };
 
