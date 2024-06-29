@@ -19,6 +19,7 @@ const CheckOut: React.FC = () => {
       <h1>退勤</h1>
       <button onClick={handleCheckOut}>退勤する</button>
       <p>{message}</p>
+      <h2>コメント</h2>
     </div>
   );
 };
