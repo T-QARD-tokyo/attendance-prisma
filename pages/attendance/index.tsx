@@ -8,10 +8,7 @@ const Page: React.FC = () => {
       <nav>
         <ul>
           <li>
-            <Link href="/attendance/checkin">出勤</Link>
-          </li>
-          <li>
-            <Link href="/attendance/checkout">退勤</Link>
+            <Link href="/attendance/record">勤怠記録をつける</Link>
           </li>
         </ul>
       </nav>

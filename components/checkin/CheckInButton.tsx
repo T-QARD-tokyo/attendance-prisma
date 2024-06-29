@@ -1,21 +1,45 @@
+'use client';
 import React, { useState } from 'react';
+import prisma from '../../lib/prisma';
 
-const CheckInButton: React.FC = () => {
+type Props = {
+  userID: string;
+}
+
+export const CheckInButton = (props: Props) => {
   const [message, setMessage] = useState('');
 
   const handleCheckIn = async () => {
     try {
       //const response = await axios.post('/api/attendance/checkin');
-      let response = {data: {message: '出勤しました。'}};
-      setMessage(response.data.message);
+      const response = await prisma.user.findUnique(
+        {
+          where: {
+            id: props.userID
+          }
+        }
+      )
+      if (response.working) {
+        throw new Error('すでに出勤しています。');
+      } else {
+        await prisma.user.update({
+          where: {
+            id: props.userID
+          },
+          data: {
+            working: true
+          }
+        })
+      }
     } catch (error) {
-      setMessage('エラーが発生しました。再試行してください。');
+      setMessage(error.message);
     }
   };
 
   return (
     <div>
       <button onClick={handleCheckIn}>出勤する</button>
+      <p>{message}</p>
     </div>
   );
 };
